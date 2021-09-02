@@ -13,11 +13,14 @@
 }
 html {
   height: 100%;
+  margin: 0;
+  overflow: hidden;
 }
 body {
     background: linear-gradient(to bottom, #FD9AB6, #3324a8);   
     /* height: 100%; */
     margin: 0;
+    overflow: hidden;
 }
 
 h1 {
@@ -167,7 +170,7 @@ form{
   transition: 1s ease;
 }
 
-@media only screen and (max-width: 415px){
+@media only screen and (max-width: 540px){
   h1{
     /* margin-bottom: 0; */
   }
@@ -223,4 +226,5 @@ form{
   #tasks-visibility{
     display: none;
   }
+  
 }
