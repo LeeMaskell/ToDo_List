@@ -19,6 +19,7 @@ body {
     /* height: 100%; */
     margin: 0;
 }
+
 h1 {
   font-family: 'Fira Sans';
   font-size: 2.25rem;
@@ -48,6 +49,12 @@ main{
   display: flex;
   justify-content: center;
 }
+.responsive-nav{
+  display: none;
+}
+.home-btn{
+  display: none;
+}
 section{
   width: 30%;
   height: auto;
@@ -59,6 +66,16 @@ section{
 #tasks{
   margin-left: 1rem;
   margin-right: 1rem;
+}
+
+#projects-visibility {
+  display: block;
+}
+#tasks-visibility {
+  display: block;
+}
+#learning-visibility {
+  display: block;
 }
 
 form{
@@ -155,33 +172,55 @@ form{
     /* margin-bottom: 0; */
   }
   main{
-    display: grid;
-    grid-template-columns: 85%;
-    grid-template-rows: 10% 10% 10% 10% 10% 10% 10%;
-    height: 80%;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    /* grid-template-columns: 85%;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    height: 80%; */
+  }
+  .responsive-nav{
+    display: block;
+  }
+  .home-btn{
+    display: block;
   }
   section{
-    width: 100%;
+    width: 85%;
+    /* width: 100%; */
     height: 140%; 
     box-shadow: 0 -8px 10px -6px gray;
     left: 5%;
     overflow: scroll;
+
   }
   #projects{
     z-index: 1;
-    grid-area: 1 / 1 / 5 / 1;
+    margin-bottom: 0;
+    order: 3;
+    margin-top: 0;
+    /* grid-area: 1 / 1 / 5 / 1; */
   }
   #tasks{
     z-index: 2;
-    margin-left: 0;
+    margin-bottom: 0;
+    order: 2;
+    margin-top: 0;
+    /* margin-left: 0;
     margin-right: 0;
-    grid-area: 2 / 1 / 6 / 1;
+    grid-area: 2 / 1 / 6 / 1; */
   }
   #learning{
     z-index: 3;
-    margin-left: 0;
+    order: 1
+    /* margin-left: 0;
     margin-right: 0;
-    grid-area: 3 / 1 / 7 / 1;
-
+    grid-area: 3 / 1 / 7 / 1; */
+  }
+  #projects-visibility{
+    display: none;
+  }
+  #tasks-visibility{
+    display: none;
   }
 }

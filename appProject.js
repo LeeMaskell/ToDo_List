@@ -8,7 +8,7 @@ const projectSection = document.getElementById('projects');
 // const todos = [];
 
 // FUNCTIONS
-const universalAddFunction = () => {}
+const universalAddFunction = () => { }
 
 const addProject = () => {
     event.preventDefault();
@@ -47,7 +47,7 @@ const projectComplete = (event) => { // event must be passed in. This is the cli
 const deleteProject = (event) => {
     const removeItem = event.target.parentElement.parentElement;
     event.target.parentElement.parentElement.classList.add('fall');
-    removeItem.addEventListener('transitionend', function (){
+    removeItem.addEventListener('transitionend', function () {
         removeItem.remove();
     })
     removeProjects(removeItem);
@@ -55,7 +55,7 @@ const deleteProject = (event) => {
 // SAVE TO LOCAL STORAGE
 const saveLocal = (newProject) => {
     let projects;
-    if(localStorage.getItem('item') === null) {
+    if (localStorage.getItem('item') === null) {
         projects = [];
     } else {
         projects = JSON.parse(localStorage.getItem('item'));
@@ -67,17 +67,17 @@ const saveLocal = (newProject) => {
 // RE-RENDER PROJECTS FROM STORAGE ON REFRESH
 const getProjects = () => {
     let projects;
-    if(localStorage.getItem('item') === null) {
+    if (localStorage.getItem('item') === null) {
         projects = [];
     } else {
         projects = JSON.parse(localStorage.getItem('item'));
     }
-    projects.forEach(function(project){
-        const createProjectDiv = document.createElement('div'); 
+    projects.forEach(function (project) {
+        const createProjectDiv = document.createElement('div');
         createProjectDiv.classList.add('item');
         const projectItem = document.createElement('h3');
         projectItem.innerText = project; // this should match the argument passed in to the forEach function. An arbitray name for the elemnt in the data array.
-        container.appendChild(createProjectDiv); 
+        container.appendChild(createProjectDiv);
         createProjectDiv.appendChild(projectItem);
         //crate button div for styling
         const buttonDiv = document.createElement('div');
@@ -87,21 +87,21 @@ const getProjects = () => {
         checkButton.innerText = 'Done';
         checkButton.classList.add("complete-Btn");
         buttonDiv.appendChild(checkButton);
-        checkButton.addEventListener('click', projectComplete); 
+        checkButton.addEventListener('click', projectComplete);
         // create delete button
         const deleteButton = document.createElement('button');
         deleteButton.innerText = 'Del';
         deleteButton.classList.add("delete-Btn");
         buttonDiv.appendChild(deleteButton);
         deleteButton.addEventListener('click', deleteProject);
-        createProjectDiv.appendChild(buttonDiv); 
-})
+        createProjectDiv.appendChild(buttonDiv);
+    })
 };
 
 const removeProjects = (project) => {  // this function is required to remove item from storage based on the delete button functioning
     let projects;
-    if(localStorage.getItem('item') === null){
-        projects= [];
+    if (localStorage.getItem('item') === null) {
+        projects = [];
     } else {
         projects = JSON.parse(localStorage.getItem('item'));
     }
@@ -113,19 +113,68 @@ const removeProjects = (project) => {  // this function is required to remove it
 getProjects();
 
 const moveProjectToFront = () => {
-    document.getElementById("projects").style.zIndex = "3"; // move to front
-    document.getElementById("learning").style.zIndex = "2"; // move to middle
-    document.getElementById("tasks").style.zIndex = "1"; // move to bottom
-    document.getElementById("projects").style.gridArea = "3 / 1 / 7 / 1"; // move to bottom
-    document.getElementById("learning").style.gridArea = "2 / 1 / 6 / 1";
-    document.getElementById("tasks").style.gridArea = "1 / 1 / 5 / 1";
+    if (window.innerWidth < 415) {
+        document.getElementById("projects").style.zIndex = "3"; // move to front
+        document.getElementById("learning").style.zIndex = "2"; // move to middle
+        document.getElementById("tasks").style.zIndex = "1"; // move to bottom
+
+        document.getElementById("projects-visibility").style.display = "block";
+        document.getElementById("tasks-visibility").style.display = "none";
+        document.getElementById("learning-visibility").style.display = "none";
+
+        document.getElementById("projects").style.marginTop = "17%";
+        document.getElementById("tasks").style.marginTop = "0";
+        document.getElementById("learning").style.marginTop = "17%";
+
+        document.getElementById("projects").style.order = "1";
+        document.getElementById("tasks").style.order = "3";
+        document.getElementById("learning").style.order = "2";
+
+        document.getElementById("tasks").style.marginBottom = "-20%";
+        document.getElementById("learning").style.marginBottom = "-20%";
+        document.getElementById("projects").style.marginBottom = "0";
+    }
 }
+
+// clunky functionality required as quick fix for responsive layout. Original CSS grid code wasn't compatible with safari
+const resetDesktopStyles = () => {
+    if (window.innerWidth > 415) {
+        document.getElementById("projects-visibility").style.display = "block";
+        document.getElementById("tasks-visibility").style.display = "block";
+        document.getElementById("learning-visibility").style.display = "block";
+
+        document.getElementById("projects").style.marginTop = "0";
+        document.getElementById("tasks").style.marginTop = "0";
+        document.getElementById("learning").style.marginTop = "0";
+
+        document.getElementById("tasks").style.marginBottom = "0";
+        document.getElementById("learning").style.marginBottom = "0";
+        document.getElementById("projects").style.marginBottom = "0";
+    } else if (window.innerWidth < 415) {
+        document.getElementById("projects-visibility").style.display = "none";
+        document.getElementById("tasks-visibility").style.display = "none";
+        document.getElementById("learning-visibility").style.display = "block";
+
+        document.getElementById("projects").style.marginTop = "0";
+        document.getElementById("tasks").style.marginTop = "17%";
+        document.getElementById("learning").style.marginTop = "17%";
+
+        document.getElementById("learning").style.order = "1";
+        document.getElementById("projects").style.order = "3";
+        document.getElementById("tasks").style.order = "2";
+
+        document.getElementById("tasks").style.marginBottom = "-20%";
+        document.getElementById("learning").style.marginBottom = "0";
+        document.getElementById("projects").style.marginBottom = "-20%";
+    }
+}
+
 
 // EVENT LISTENERS
 projectAddBtn.addEventListener('click', addProject);
 
 projectSection.addEventListener('click', moveProjectToFront); // change to touch end when functionality works
 
-
+window.addEventListener('resize', resetDesktopStyles);
 
 

@@ -46,7 +46,7 @@ const taskComplete = (event) => { // event must be passed in. This is the click 
 const deleteTask = (event) => {
     const removeItem2 = event.target.parentElement.parentElement;
     event.target.parentElement.parentElement.classList.add('fall');
-    removeItem2.addEventListener('transitionend', function (){
+    removeItem2.addEventListener('transitionend', function () {
         removeItem2.remove();
     })
     removeTask(removeItem2);
@@ -54,7 +54,7 @@ const deleteTask = (event) => {
 // SAVE TO LOCAL STORAGE
 const saveLocalTask = (newTask) => {
     let task;
-    if(localStorage.getItem('item2') === null) {
+    if (localStorage.getItem('item2') === null) {
         task = [];
     } else {
         task = JSON.parse(localStorage.getItem('item2'));
@@ -66,17 +66,17 @@ const saveLocalTask = (newTask) => {
 // RE-RENDER PROJECTS FROM STORAGE ON REFRESH
 const getTask = () => {
     let task;
-    if(localStorage.getItem('item2') === null) {
+    if (localStorage.getItem('item2') === null) {
         task = [];
     } else {
         task = JSON.parse(localStorage.getItem('item2'));
     }
-    task.forEach(function(task){
-        const createTaskDiv = document.createElement('div'); 
+    task.forEach(function (task) {
+        const createTaskDiv = document.createElement('div');
         createTaskDiv.classList.add('item2');
         const taskItem = document.createElement('h3');
         taskItem.innerText = task; // this should match the argument passed in to the forEach function. An arbitray name for the elemnt in the data array.
-        container2.appendChild(createTaskDiv); 
+        container2.appendChild(createTaskDiv);
         createTaskDiv.appendChild(taskItem);
         //crate button div for styling
         const buttonDiv = document.createElement('div');
@@ -86,20 +86,20 @@ const getTask = () => {
         checkButton2.innerText = 'Done';
         checkButton2.classList.add("complete-Btn2");
         buttonDiv.appendChild(checkButton2);
-        checkButton2.addEventListener('click', taskComplete); 
+        checkButton2.addEventListener('click', taskComplete);
         // create delete button
         const deleteButton2 = document.createElement('button');
         deleteButton2.innerText = 'Del';
         deleteButton2.classList.add("delete-Btn2");
         buttonDiv.appendChild(deleteButton2);
         deleteButton2.addEventListener('click', deleteTask);
-        createTaskDiv.appendChild(buttonDiv); 
-})
+        createTaskDiv.appendChild(buttonDiv);
+    })
 };
 
 const removeTask = (tasky) => {  // this function is required to remove item from storage based on the delete button functioning
     let task;
-    if(localStorage.getItem('item2') === null){
+    if (localStorage.getItem('item2') === null) {
         task = [];
     } else {
         task = JSON.parse(localStorage.getItem('item2'));
@@ -112,12 +112,27 @@ const removeTask = (tasky) => {  // this function is required to remove item fro
 getTask();
 
 const moveTaskToFront = () => {
-    document.getElementById("tasks").style.zIndex = "3"; // move to front  proj
-    document.getElementById("projects").style.zIndex = "2"; // move to middle learn
-    document.getElementById("learning").style.zIndex = "1"; // move to bottom  tasks
-    document.getElementById("tasks").style.gridArea = "3 / 1 / 7 / 1"; // move to bottom  proj
-    document.getElementById("projects").style.gridArea = "2 / 1 / 6 / 1";  // learn
-    document.getElementById("learning").style.gridArea = "1 / 1 / 5 / 1"; // tasks
+    if (window.innerWidth < 415) {
+        document.getElementById("tasks").style.zIndex = "3"; // move to front  proj
+        document.getElementById("projects").style.zIndex = "1"; // move to middle learn
+        document.getElementById("learning").style.zIndex = "2"; // move to bottom  tasks
+
+        document.getElementById("projects-visibility").style.display = "none";
+        document.getElementById("tasks-visibility").style.display = "block";
+        document.getElementById("learning-visibility").style.display = "none";
+
+        document.getElementById("projects").style.marginTop = "0";
+        document.getElementById("tasks").style.marginTop = "17%";
+        document.getElementById("learning").style.marginTop = "17%";
+
+        document.getElementById("tasks").style.order = "1";
+        document.getElementById("learning").style.order = "2";
+        document.getElementById("projects").style.order = "3";
+
+        document.getElementById("tasks").style.marginBottom = "0";
+        document.getElementById("learning").style.marginBottom = "-20%";
+        document.getElementById("projects").style.marginBottom = "-20%";
+    }
 }
 
 // EVENT LISTENERS

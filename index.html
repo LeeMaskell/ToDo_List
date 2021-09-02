@@ -8,42 +8,61 @@
     <title>To Do List</title>
     <link href="style.css" type="text/css" rel="stylesheet">
 </head>
+
 <body>
     <header>
         <h1>To Do List...</h1>
     </header>
+
     <main>
+        <!-- <nav class="responsive-nav">
+            <button class="responsive-nav__btn">Learning</button>
+            <button class="responsive-nav__btn">Tasks</button>
+            <button class="responsive-nav__btn">Projects</button>
+        </nav>
+
+        <button class="home-btn"></button> -->
+
         <section id="projects">
             <h2>PROJECTS</h2>
-            <form>
-                <input class="projectInput" type="text" id="input">
-                <button class="projectAddBtn" type="submit">Add</button>
-            </form>
-            <div class="listContainer"> 
+            <div id="projects-visibility">
+                <form>
+                    <input class="projectInput" type="text" id="input">
+                    <button class="projectAddBtn" type="submit">Add</button>
+                </form>
+                <div class="listContainer">
+                </div>
             </div>
         </section>
+
         <section id="tasks">
             <h2>TASKS</h2>
-            <form>
-                <input class="taskInput" type="text" id="input2">
-                <button class="taskAddBtn" type="submit">Add</button>
-            </form>
-            <div class="listContainer2"> 
+            <div id="tasks-visibility">
+                <form>
+                    <input class="taskInput" type="text" id="input2">
+                    <button class="taskAddBtn" type="submit">Add</button>
+                </form>
+                <div class="listContainer2">
+                </div>
             </div>
         </section>
+
         <section id="learning">
             <h2>LEARNING</h2>
-            <form>
-                <input class="learningInput" type="text" id="input3">
-                <button class="learningAddBtn" type="submit">Add</button>
-            </form>
-            <div class="listContainer3"> 
+            <div id="learning-visibility">
+                <form>
+                    <input class="learningInput" type="text" id="input3">
+                    <button class="learningAddBtn" type="submit">Add</button>
+                </form>
+                <div class="listContainer3">
+                </div>
             </div>
         </section>
     </main>
-<script src="appProject.js"></script>
-<script src="appTask.js"></script>
-<script src="appLearning.js"></script>
+
+    <script src="appProject.js"></script>
+    <script src="appTask.js"></script>
+    <script src="appLearning.js"></script>
 </body>
 
 </html>
